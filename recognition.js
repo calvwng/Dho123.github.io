@@ -26,7 +26,7 @@
           for (var i = event.resultIndex; i < event.results.length; i++) {
 
 		    result = event.results[i][0].transcript;
-			if (result.indexOf("stop") > -1 && stop == 0) {
+			if (result.indexOf("stop") > -1) {
                 recognizer.stop();
 				log.innerHTML = 'Recognition stopped' + '<br />' + log.innerHTML;
 				stop = 1;
@@ -46,7 +46,7 @@
                     alert("Hello to you as well.");
                 }
                 if (result.indexOf("new tab") > -1) {
-                    window.open("http://www.google.com");
+                    window.open();
                 }
             }
             else if(stop == 0) {

@@ -43,7 +43,10 @@
             // When result is finalized
             if (event.results[i].isFinal) {
               transcription.textContent = result + ' (Confidence: ' + event.results[i][0].confidence + ')';
-                log.innerHTML = result.substr(0,result.indexOf(' ')) + '<br />' + log.innerHTML;
+              
+                // First word will be some command.
+                var cmd = result.substr(0,result.indexOf(' '));
+                
                 if (result.indexOf("print") == 0) {
                     log.innerHTML = result.substring(6) + '<br />' + log.innerHTML;
                 }
@@ -52,6 +55,9 @@
                 }
                 if (result.indexOf("new tab") > -1) {
                     window.open();
+                }
+                if (result.indexOf("go to ") > -1) {
+                    window.open(result.substring(6));
                 }
             }
             else if(stop == 0) {

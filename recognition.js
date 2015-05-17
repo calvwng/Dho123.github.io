@@ -52,6 +52,7 @@
               transcription.textContent += result;
             }
           }
+          recognizer.stop();
         };
  
         // Listen for errors

@@ -60,8 +60,8 @@
           log.innerHTML = 'Recognition error: ' + event.message + '<br />' + log.innerHTML;
         };
  
-        window.onunload = function() {
-            recognizer.stop();
+        window.onbeforeunload = function() {
+            recognizer.abort();
         }
  
         document.getElementById('button-play-ws').addEventListener('click', function() {

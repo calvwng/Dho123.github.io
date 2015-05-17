@@ -26,19 +26,24 @@
           for (var i = event.resultIndex; i < event.results.length; i++) {
 
 		    result = event.results[i][0].transcript;
+            
+            // Stops recognizing when "stop" is heard
 			if (result.indexOf("stop") > -1 && stop == 0) {
                 recognizer.stop();
 				log.innerHTML = 'Recognition stopped' + '<br />' + log.innerHTML;
 				stop = 1;
             }
+
+            // Gets rid of weird extra whitespace.
 			if (i > 0 && stop == 0) {
 			  console.log("test\n");
 			  result = result.substring(1);
 			}
-			  
+			
+            // When result is finalized
             if (event.results[i].isFinal) {
               transcription.textContent = result + ' (Confidence: ' + event.results[i][0].confidence + ')';
-              
+                log.innerHTML += result[0];
                 if (result.indexOf("print") == 0) {
                     log.innerHTML = result.substring(6) + '<br />' + log.innerHTML;
                 }

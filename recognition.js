@@ -57,7 +57,7 @@
                     window.open();
                 }
                 if (result.indexOf("go to ") > -1) {
-                    window.open(result.substring(6));
+                    window.open("http://" + result.substring(6));
                 }
             }
             else if(stop == 0) {

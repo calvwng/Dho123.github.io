@@ -58,8 +58,11 @@
         // Listen for errors
         recognizer.onerror = function(event) {
           log.innerHTML = 'Recognition error: ' + event.message + '<br />' + log.innerHTML;
-          recognizer.abort();
         };
+ 
+        window.onunload = function() {
+            recognizer.stop();
+        }
  
         document.getElementById('button-play-ws').addEventListener('click', function() {
           // Set if we need interim results

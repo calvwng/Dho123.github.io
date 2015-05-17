@@ -46,18 +46,19 @@
                     alert("Hello to you as well.");
                 }
                 if (result.indexOf("new tab") > -1) {
-                    window.open("google.com");
+                    window.open("http://www.google.com");
                 }
-            } else if(stop == 0){
+            }
+            else if(stop == 0) {
               transcription.textContent += result;
             }
           }
-          recognizer.stop();
         };
  
         // Listen for errors
         recognizer.onerror = function(event) {
           log.innerHTML = 'Recognition error: ' + event.message + '<br />' + log.innerHTML;
+          recognizer.abort();
         };
  
         document.getElementById('button-play-ws').addEventListener('click', function() {

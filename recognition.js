@@ -26,7 +26,7 @@
           for (var i = event.resultIndex; i < event.results.length; i++) {
 
 		    result = event.results[i][0].transcript;
-			if (result.indexOf("stop") > -1) {
+			if (result.indexOf("stop") > -1 && stop == 0) {
                 recognizer.stop();
 				log.innerHTML = 'Recognition stopped' + '<br />' + log.innerHTML;
 				stop = 1;

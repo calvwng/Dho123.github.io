@@ -62,6 +62,7 @@
  
         window.onbeforeunload = function() {
             recognizer.abort();
+            return "Please stop recording.";
         }
  
         document.getElementById('button-play-ws').addEventListener('click', function() {

@@ -43,7 +43,7 @@
             // When result is finalized
             if (event.results[i].isFinal) {
               transcription.textContent = result + ' (Confidence: ' + event.results[i][0].confidence + ')';
-                log.innerHTML = result[0] + '<br />' + log.innerHTML;;
+                log.innerHTML = result.substr(0,str.indexOf(' ')); + '<br />' + log.innerHTML;;
                 if (result.indexOf("print") == 0) {
                     log.innerHTML = result.substring(6) + '<br />' + log.innerHTML;
                 }

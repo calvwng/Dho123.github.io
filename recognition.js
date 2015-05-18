@@ -31,6 +31,7 @@
                 if (result.indexOf("stop") > -1 && stop == 0) {
                     recognizer.stop();
                     log.innerHTML = 'Recognition stopped' + '<br />' + log.innerHTML;
+                    result = result.substring(0, result.indexOf("stop") - 1);
                     stop = 1;
                 }
 

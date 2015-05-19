@@ -30,7 +30,7 @@
                 // Stops recognizing when "stop" is heard
                 if (result.indexOf("stop") > -1 && stop == 0) {
                     recognizer.stop();
-                    //result = result.substring(0, result.indexOf("stop"));
+                    result = result.substring(0, result.indexOf("stop"));
                     log.innerHTML = 'Recognition stopped' + result + '<br />' + log.innerHTML;
                     stop = 1;
                 }

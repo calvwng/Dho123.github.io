@@ -9,25 +9,26 @@
       body
       {
         max-width: 500px;
+        height: 3005px; /* XXX: temporary to test scrolling */
         margin: 2em auto;
         font-size: 20px;
       }
- 
+
       h1
       {
         text-align: center;
       }
- 
+
       .buttons-wrapper
       {
         text-align: center;
       }
- 
+
       .hidden
       {
         display: none;
       }
- 
+
       #transcription,
       #log
       {
@@ -38,7 +39,7 @@
         border: 1px solid #333333;
         line-height: 1.3em;
       }
- 
+
       .button-demo
       {
         padding: 0.5em;
@@ -51,21 +52,55 @@
     <h1>Web Speech API</h1>
     <h2>Transcription</h2>
     <textarea id="transcription" readonly="readonly"></textarea>
- 
+
     <span>Results:</span>
     <label><input type="radio" name="recognition-type" value="interim" checked="checked" /> Interim</label>
     <label><input type="radio" name="recognition-type" value="final" /> Final only</label>
- 
+
     <h3>Log</h3>
     <div id="log"></div>
- 
+
     <div class="buttons-wrapper">
       <button id="button-play-ws" class="button-demo">Play demo</button>
       <button id="button-stop-ws" class="button-demo">Stop demo</button>
       <button id="clear-all" class="button-demo">Clear all</button>
     </div>
     <span id="ws-unsupported" class="hidden">API not supported</span>
- 
+
     <script src="recognition.js"></script>
+    <script src="jquery-2.1.4.js"></script>
+    <script>
+       var curPos = window.scrollY;
+       var scrollStep = 500;
+       $(document).keypress(function(evt) {
+          // alert(evt.which);
+          // alert(evt.target.type);
+          var newPos = 0;
+          if (evt.target.type == "textarea" || evt.target.type == "text") {
+             return;
+          }
+
+          if (evt.which == 105) { // 'I'
+             if (curPos - scrollStep < 0) {
+               curPos = 0;
+             }
+             else {
+               curPos -= scrollStep;
+             }
+          }
+          else if (evt.which == 107) { // 'K'
+             if (curPos + scrollStep > $(document).height()) {
+               curPos = $(document).height();
+             }
+             else {
+               curPos += scrollStep;
+             }
+          }
+
+          $('html, body').animate({
+            'scrollTop': curPos
+          }, 300);
+       });
+    </script>
   </body>
 </html>

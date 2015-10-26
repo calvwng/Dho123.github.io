@@ -2,40 +2,32 @@
 window.Voice4Game = (function() {
    var Voice4Game = {};
 
-   /**
-   * Object containing a voice command's corresponding command text and function
-   */
-   Voice4Game.VoiceCmd = function(cmdText, cmdFunc) {
-      this.cmdText = cmdText;
-      this.cmdFunc = cmdFunc;
-   };
-
    /* 
-   * Maps game command names to VoiceCmd objects
-   * String -> VoiceCmd
+   * Maps voice commands to corresponding functions
+   * String -> Function
    */                            
-   Voice4Game.cmdToVC = {};
+   Voice4Game.textToFunc = {};
    
    /**
-   * Initialize the Voice4Game library with a mapping of game command names to 
-   * objects with corresponding voice commands and functions
+   * Initialize the Voice4Game library with a mapping of voice commands to
+   * corresponding functions
    */
-   Voice4Game.init = function(cmdToVCMap) {
-      Voice4Game.cmdToVC = cmdToVCMap;
+   Voice4Game.init = function(textToFuncMap) {
+      Voice4Game.textToFunc = textToFuncMap;
    };
    
    /**
    * Register a voice command in mapping
    */
-   Voice4Game.registerVoiceCmd = function(cmdName, cmdText, cmdFunc) {
-      Voice4Game.cmdToVC[cmdName] = new VoiceCmd(cmdText, cmdFunc);
+   Voice4Game.registerVoiceCmd = function(voiceCmd, cmdFunc) {
+      Voice4Game.textToFunc[voiceCmd] = cmdFunc;
    };
    
    /**
    * Unregister a voice command from mapping
    */
-   Voice4Game.unregisterVoiceCmd = function(cmdName) {
-      delete Voice4Game.cmdToVC[cmdName];
+   Voice4Game.unregisterVoiceCmd = function(voiceCmd) {
+      delete Voice4Game.textToFunc[voiceCmd];
    };
    
    return Voice4Game;
@@ -61,10 +53,10 @@ function moveRight() {
 * Mock initialization of Voice4Game
 */
 Voice4Game.init({
-   'up': new Voice4Game.VoiceCmd("move up", moveUp),
-   'down': new Voice4Game.VoiceCmd("move down", moveDown),
-   'left': new Voice4Game.VoiceCmd("move left", moveLeft),
-   'right': new Voice4Game.VoiceCmd("move right", moveRight)
+   'up': moveUp,
+   'down': moveDown,
+   'left': moveLeft,
+   'right': moveRight
 });
 
 // Test browser support
@@ -157,10 +149,9 @@ Voice4Game.init({
                     /*
                     * Check if result matches any registered Voice4Game commands
                     */
-                    for (var cmdName in Voice4Game.cmdToVC) {
-                       var voiceCmd = Voice4Game.cmdToVC[cmdName];
-                       if (result.indexOf(voiceCmd.cmdText) > -1) {
-                          voiceCmd.cmdFunc();
+                    for (var voiceCmd in Voice4Game.textToFunc) {
+                       if (result.indexOf(voiceCmd) > -1) {
+                          Voice4Game.textToFunc[voiceCmd]();
                           break;
                        }
                     }

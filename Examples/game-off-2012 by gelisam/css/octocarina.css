@@ -1,0 +1,498 @@
+h1 {
+  text-align: center;
+  color: #57a250;
+}
+#content {
+  width: 808px;
+  height: 650px;
+  overflow: hidden;
+  margin: auto;
+}
+
+#splash {
+  text-align: center;
+}
+.splash-img {
+  display: block;
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+.btn {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.scene {
+  width: 808px;
+  height: 650px;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  margin-right: -808px;
+}
+.filter {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+}
+.dark {
+  background-color: black;
+}
+.light {
+  background-color: white;
+}
+
+/* Each sprite has a width of 100px, plus a 1px border on the right which
+ * overlaps with the next tile. A sprite also has a depth of 80px and a height
+ * of up to 90px, for a total of 170px plus an overlapping bottom border.
+ * 
+ * All blocks have the same height: 40px. This allows them to stack nicely.
+ */
+.layer {
+  font-size: 0px; /* no gap between rows */
+  height: 480px; /* 6*80px depth */
+  margin-bottom: -520px; /* 6*80px depth + 40px stacking height */
+  position: relative;
+  top: 40px; /* 1*40px stacking height */
+}
+.hint-layer {
+  margin-bottom: -480px; /* 6*80px depth */
+  top: 80px;
+}
+.layer-line
+{
+	width: 3000px;
+	height: 80px;
+	margin: 0 auto;
+}
+.sprite {
+  width: 101px; /* 100px width + 1px border */
+  height: 171px; /* 80px depth + 90px height + 1px border */
+  background-image: url('../img/sprites.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: -1px; /* 1px border */
+  margin-bottom: -91px; /* 90px height + 1px border */
+  
+  /* http://stackoverflow.com/questions/6953497/webkit-transform-overwrites-z-index-ordering-in-chrome-13 */
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  -moz-transform: translate3d(0px, 0px, 0px);
+}
+.preloader {
+  display: none;
+  width: 1px;
+  height: 1px;
+}
+.empty-tile {
+  background-position: 101px;
+}
+.floor-tile {
+  background-position: 0px;
+}
+.wall-tile {
+  background-position: -101px;
+}
+.closed-door-tile {
+  background-position: -707px;
+}
+.open-door-tile {
+  background-position: -808px;
+}
+.wooden-block-sprite {
+  background-position: -202px;
+}
+.red-button-tile {
+  background-position: -909px;
+}
+.pressed-red-button-tile {
+  background-position: -1010px;
+}
+.red-block-sprite {
+  background-position: -3030px;
+}
+.green-button-tile {
+  background-position: -1111px;
+}
+.pressed-green-button-tile {
+  background-position: -1212px;
+}
+.green-block-sprite {
+  background-position: -1313px;
+}
+.blue-button-tile {
+  background-position: -1414px;
+}
+.pressed-blue-button-tile {
+  background-position: -1515px;
+}
+.blue-block-sprite {
+  background-position: -1616px;
+}
+.orange-button-tile {
+  background-position: -1717px;
+}
+.pressed-orange-button-tile {
+  background-position: -1818px;
+}
+.orange-block-sprite {
+  background-position: -1919px;
+}
+.blood-on-floor {
+  background-position: -3939px;
+}
+.fork-on-floor {
+  background-position: -4040px;
+}
+.dropped-fork {
+  background-position: -4141px;
+}
+.forktopus {
+  background-position: -4545px;
+}
+.forktopus.left {
+  background-position: -4646px;
+}
+.forktopus.up {
+  background-position: -6262px;
+}
+.forked-block-hint-sprite {
+  background-position: -4848px;
+}
+.hint-block-sprite {
+  background-position: -5555px;
+}
+.block-shadow {
+  background-position: -5757px;
+}
+.gem-shadow {
+  background-position: -5858px;
+}
+.player-shadow {
+  background-position: -5959px;
+}
+.lover-shadow {
+  background-position: -6060px;
+}
+.forktopus-shadow {
+  background-position: -6161px;
+}
+
+/* based on http://www.cssreset.com/css3-webkit-animation-shake-links/ */
+@-webkit-keyframes spaceboots {
+        0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+        10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+        20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+        30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+        40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+        50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+        60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+        70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+        80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+        90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+        100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+@-moz-keyframes spaceboots {
+        0% { -moz-transform: translate(2px, 1px) rotate(0deg); }
+        10% { -moz-transform: translate(-1px, -2px) rotate(-1deg); }
+        20% { -moz-transform: translate(-3px, 0px) rotate(1deg); }
+        30% { -moz-transform: translate(0px, 2px) rotate(0deg); }
+        40% { -moz-transform: translate(1px, -1px) rotate(1deg); }
+        50% { -moz-transform: translate(-1px, 2px) rotate(-1deg); }
+        60% { -moz-transform: translate(-3px, 1px) rotate(0deg); }
+        70% { -moz-transform: translate(2px, 1px) rotate(-1deg); }
+        80% { -moz-transform: translate(-1px, -1px) rotate(1deg); }
+        90% { -moz-transform: translate(2px, 2px) rotate(0deg); }
+        100% { -moz-transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shake {
+        -webkit-animation-name: spaceboots;
+        -webkit-animation-duration: 0.8s;
+        -webkit-transform-origin:50% 50%;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+        
+        -moz-animation-name: spaceboots;
+        -moz-animation-duration: 0.8s;
+        -moz-transform-origin:50% 50%;
+        -moz-animation-iteration-count: infinite;
+        -moz-animation-timing-function: linear;
+}
+
+
+.holder:before {
+  content: "";
+  width: 101px; /* 100px width + 1px border */
+  height: 171px; /* 80px depth + 90px height + 1px border */
+  background-image: url('../img/sprites.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: -101px; /* 100px width + 1px border */
+  margin-bottom: -91px; /* 90px height + 1px border */
+}
+.forked:before {
+  content: "";
+  width: 101px; /* 100px width + 1px border */
+  height: 171px; /* 80px depth + 90px height + 1px border */
+  background-image: url('../img/sprites.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: -101px; /* 100px width + 1px border */
+  margin-bottom: -91px; /* 90px height + 1px border */
+  background-position: -2020px;
+}
+.sporked:before {
+  content: "";
+  width: 101px; /* 100px width + 1px border */
+  height: 171px; /* 80px depth + 90px height + 1px border */
+  background-image: url('../img/sprites.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: -101px; /* 100px width + 1px border */
+  margin-bottom: -91px; /* 90px height + 1px border */
+  background-position: -4444px;
+}
+.pushing:after {
+  content: "";
+  width: 101px; /* 100px width + 1px border */
+  height: 171px; /* 80px depth + 90px height + 1px border */
+  background-image: url('../img/sprites.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: -1px; /* 1px border */
+  margin-bottom: -91px; /* 90px height + 1px border */
+}
+.spotted:after {
+  content: "";
+  width: 101px; /* 100px width + 1px border */
+  height: 171px; /* 80px depth + 90px height + 1px border */
+  background-image: url('../img/sprites.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: -1px; /* 1px border */
+  margin-bottom: -91px; /* 90px height + 1px border */
+  background-position: -5656px;
+}
+
+
+/* :before and :after elements show up on *top* of the main element;
+ * to display the fork under the player sprite, we display the fork
+ * in the main element and the player sprite in the pseudo-element. */
+.player-sprite.right:before {
+  background-position: -303px;
+}
+.player-sprite.down:before { /* down, and default */
+  background-position: -404px;
+}
+.player-sprite.up {
+  background-position: -505px;
+}
+.player-sprite.left:before {
+  background-position: -606px;
+}
+
+.lover-sprite.right:before {
+  background-position: -2424px;
+}
+.lover-sprite.down:before {
+  background-position: -2525px;
+}
+.lover-sprite.up {
+  background-position: -2626px;
+}
+.lover-sprite.left:before {
+  background-position: -2727px;
+}
+
+.holder.right {
+  background-position: -5454px;
+}
+.holder.down {
+  background-position: -5353px;
+}
+.holder.left {
+  background-position: -5353px;
+}
+.holder.up:before {
+  background-position: -5353px;
+}
+
+.holder.forked.right {
+  background-position: -2222px;
+}
+.holder.forked.down {
+  background-position: -2121px;
+}
+.holder.forked.left {
+  background-position: -2121px;
+}
+.holder.forked.up:before {
+  background-position: -2121px;
+}
+
+.holder.sporked.right {
+  background-position: -4343px;
+}
+.holder.sporked.down {
+  background-position: -4242px;
+}
+.holder.sporked.left {
+  background-position: -4242px;
+}
+.holder.sporked.up:before {
+  background-position: -4242px;
+}
+
+.forktopus.sporked {
+  background-position: -6363px;
+}
+.forktopus.sporked:before {
+  background-position: 101px;
+}
+
+.pushing.right:after {
+  background-position: -4949px;
+}
+.pushing.down:after {
+  background-position: -5050px;
+}
+.pushing.up:after {
+  background-position: -5151px;
+}
+.pushing.left:after {
+  background-position: -5252px;
+}
+
+.under-door {
+  background-position: -2323px !important;
+}
+.under-door:before {
+  background-position: -2323px !important;
+}
+
+.say:after {
+  content: "";
+  width: 101px; /* 100px width + 1px border */
+  height: 171px; /* 80px depth + 90px height + 1px border */
+  background-image: url('../img/sprites.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin-right: -1px; /* 1px border */
+  margin-bottom: -91px; /* 90px height + 1px border */
+  position: relative;
+  left: -70px;
+  top: -15px;
+}
+.say.heart:after {
+  background-position: -2828px;
+}
+.say.press-z:after {
+  background-position: -2929px;
+}
+.say.door-question:after {
+  background-position: -3131px;
+}
+.say.door-exclam:after {
+  background-position: -3232px;
+}
+.say.question:after {
+  background-position: -3333px;
+}
+.say.exclam:after {
+  background-position: -3434px;
+}
+.say.spork-question:after {
+  background-position: -3535px;
+}
+.say.r-question:after {
+  background-position: -3636px;
+}
+.say.fork-question:after {
+  background-position: -3737px;
+}
+.say.fork-exclam:after {
+  background-position: -3838px;
+}
+.say.spork-exclam:after {
+  background-position: -4747px;
+}
+
+
+.level-name {
+  font-size: 24px;
+  text-align: right;
+  margin-top: -1em;
+}
+
+
+#hidden {
+  display: none;
+}
+
+#credits {
+  color: white;
+  text-align: center;
+}
+#credits h3 {
+  font-size: 24px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 20px;
+}
+#credits h4 {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 5px;
+}
+#credits ul {
+  list-style-type: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+#credits img {
+  height: 300px;
+  padding: 20px;
+}
+#credits a {
+  color: white;
+}
+#credits a:visited {
+  color: white;
+}
+#credits .spacing {
+  height: 280px;
+}
+
+#thanks {
+  color: white;
+  text-align: center;
+  margin-top: 300px;
+}
+#congratulations {
+  color: white;
+  text-align: center;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0px;
+  height: 2em;
+  color: #aaa;
+  z-index: -1;
+}
+#footer a:link {color: #888;}
+#footer a:visited {color: #888;}
+#footer a:hover {color: #ccc;}
+#footer a:active {color: #ccc;}

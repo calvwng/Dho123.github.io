@@ -1,3 +1,7 @@
+# Example Credits 
+
+The following is GitHub user gelisam's open source game "Push and Fork" (https://github.com/gelisam/game-off-2012), modified to use our Voice4Game.js library to enable voice commanded control.
+
 # Push and Fork, having fun with time
 
 This is a puzzle game in which you carry a fork, push blocks, and go back in time.

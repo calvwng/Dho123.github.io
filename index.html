@@ -1,107 +1,118 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Web Speech API Demo</title>
-    <style>
-      body
-      {
-        max-width: 500px;
-        height: 3005px; /* XXX: temporary to test scrolling */
-        margin: 2em auto;
-        font-size: 20px;
-      }
+    <meta charset="utf-8">
+    <title>Push and Fork</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A puzzle game in which you carry a fork, push blocks, and go back in time.">
 
-      h1
-      {
-        text-align: center;
-      }
-
-      .buttons-wrapper
-      {
-        text-align: center;
-      }
-
-      .hidden
-      {
-        display: none;
-      }
-
-      #transcription,
-      #log
-      {
-        display: block;
-        width: 100%;
-        height: 5em;
-        overflow-y: scroll;
-        border: 1px solid #333333;
-        line-height: 1.3em;
-      }
-
-      .button-demo
-      {
-        padding: 0.5em;
-        display: inline-block;
-        margin: 1em auto;
-      }
-    </style>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/octocarina.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Web Speech API</h1>
-    <h2>Transcription</h2>
-    <textarea id="transcription" readonly="readonly"></textarea>
-
-    <span>Results:</span>
-    <label><input type="radio" name="recognition-type" value="interim" checked="checked" /> Interim</label>
-    <label><input type="radio" name="recognition-type" value="final" /> Final only</label>
-
-    <h3>Log</h3>
-    <div id="log"></div>
-
-    <div class="buttons-wrapper">
-      <button id="button-play-ws" class="button-demo">Play demo</button>
-      <button id="button-stop-ws" class="button-demo">Stop demo</button>
-      <button id="clear-all" class="button-demo">Clear all</button>
+    <div id="content">
+      <div id="splash">
+        <h1>Push and Fork</h1>
+        <noscript>This is an HTML5 game about a fork which helps you solve block-pushing puzzles. Javascript is required.</noscript>
+        <script>document.writeln('Loading...');</script>
+      </div>
     </div>
-    <span id="ws-unsupported" class="hidden">API not supported</span>
+    <div id="footer">Stuck? Watch the <a href="http://www.youtube.com/watch?v=g122TdLjRSs">walkthrough</a> video.</div>
+    <div class="sprite preloader"></div>
+    <a href="https://github.com/Octocarina/game-off-2012/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="js/voice4game.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/jquery.transit.min.js"></script>
+    <script src="js/EventQueue.js"></script>
+    <script src="js/ActionQueue.js"></script>
+    <script src="js/Pos.js"></script>
+    <script src="js/Table.js"></script>
+    <script src="js/Tile.js"></script>
+    <script src="js/Moveable.js"></script>
+    <script src="js/Tracker.js"></script>
+    <script src="js/Room.js"></script>
+    <script src="js/Multiroom.js"></script>
+    <script src="js/Multi.js"></script>
+    <script src="js/World.js"></script>
+    <script src="js/Sprite.js"></script>
+    <script src="js/Layer.js"></script>
+    <script src="js/Scene.js"></script>
+    <script src="js/Theatre.js"></script>
+    <script src="js/Button.js"></script>
+    <script src="js/Buttons.js"></script>
+    <script src="js/Multibuttons.js"></script>
+    <script src="js/Shadows.js"></script>
+    <script src="js/ForkedBlock.js"></script>
+    <script src="js/Keycode.js"></script>
+    <script src="js/octocarina.js"></script>
+    <script type="text/javascript">
+      //To Do : move in apropriate place
+      Array.prototype.remove = function (from, to) {
+        var rest = this.slice((to || from) + 1 || this.length);
+        this.length = from < 0 ? this.length + from : from;
+        return this.push.apply(this, rest);
+      };
 
-    <!--<script src="recognition.js"></script>-->
-   <script src="voice4game.js"></script>    
-    <script src="jquery-2.1.4.js"></script>
-    <script>
-       var curPos = window.scrollY;
-       var scrollStep = 500;
-       $(document).keypress(function(evt) {
-          // alert(evt.which);
-          // alert(evt.target.type);
-          var newPos = 0;
-          if (evt.target.type == "textarea" || evt.target.type == "text") {
-             return;
-          }
-
-          if (evt.which == 105) { // 'I'
-             if (curPos - scrollStep < 0) {
-               curPos = 0;
-             }
-             else {
-               curPos -= scrollStep;
-             }
-          }
-          else if (evt.which == 107) { // 'K'
-             if (curPos + scrollStep > $(document).height()) {
-               curPos = $(document).height();
-             }
-             else {
-               curPos += scrollStep;
-             }
-          }
-
-          $('html, body').animate({
-            'scrollTop': curPos
-          }, 300);
-       });
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-7465014-3']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
     </script>
+    <div id="hidden">
+      <div id="credits">
+        <h3>CREDITS</h3>
+        <h4>Lead Programmer</h4>
+        <ul>
+          <li>Samuel Gélineau</li>
+        </ul>
+        <h4>Programmers</h4>
+        <ul>
+          <li>Matan Nassau</li>
+          <li>Alexis Leroux-Chartré</li>
+          <li>Jimmy Lahaie</li>
+        </ul>
+        <h4>Advice</h4>
+        <ul>
+          <li>Bob Quenneville</li>
+        </ul>
+        <h4>Game Art</h4>
+        <ul>
+          <li>Daniel Cook's free <a href="http://www.lostgarden.com/2007/05/dancs-miraculously-flexible-game.html">PlanetCute</a> tileset</li>
+          <li><a href="http://doctor-gus.deviantart.com/">Doctor-Gus</a>'s fork art (the monster)</li>
+          <li>Nadezda Ershova</li>
+          <li>Samuel Gélineau</li>
+        </ul>
+        <h4>Quality Assurance</h4>
+        <ul>
+          <li>Keegan George</li>
+        </ul>
+        <h4>Beta Testers</h4>
+        <ul>
+          <li>Bob Quenneville</li>
+          <li>Catherine Villeneuve</li>
+          <li>Jonathan Primeau</li>
+          <li>Nadezda Ershova</li>
+          <li>Stéphanie Simard</li>
+          <li>Stéphane Beaudry</li>
+          <li>Pascal Jetté</li>
+        </ul>
+        <h4>Special Thanks</h4>
+        <ul>
+          <li>Github for their inspiring contest rules</li>
+        </ul>
+      </div>
+      <div id="thanks">
+        <h3>Thanks for playing!</h3>
+      </div>
+      <div id="congratulations">
+        <div class="message">You have unlocked a new bonus level.</div>
+        <div class="continue">(Press any key to continue)</div>
+      </div>
+    </div>
   </body>
 </html>
